@@ -97,7 +97,7 @@ namespace Manimal.Icebreaker.Blowtorch
 
     // async controller factory during hand swaps only recognizes the rangefinder —
     // for our item it builds a controller with a null item and breaks the swap
-    [HarmonyPatch(typeof(ClientUsableItemController), "smethod_11")]
+    [HarmonyPatch(typeof(ClientUsableItemController), "CreateAsync")]
     internal static class Patch_TorchSmethod11
     {
         [HarmonyPrefix]
