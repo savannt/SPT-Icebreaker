@@ -151,7 +151,7 @@ namespace Manimal.Icebreaker
     // at the night value, so NVGs flip down and flashlights click on naturally, exactly
     // like vanilla night) — the postfix then lifts the FINAL VisibleDist to day level,
     // weather debuff still applied outdoors. bots act night, see day.
-    [HarmonyPatch(typeof(LookSensor), "method_2")]
+    [HarmonyPatch(typeof(LookSensor), nameof(LookSensor.CalcVisibleDistance))]
     internal static class Patch_DayVisionOnLitShip
     {
         // proof-of-life: fika bots felt blind (07-28 coop) and the first question is

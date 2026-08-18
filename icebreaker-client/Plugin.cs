@@ -466,11 +466,29 @@ namespace Manimal.Icebreaker
             IcebreakerBundleHost.Init(harmony);
             IcebreakerBundleHost.CleanLegacyStreamingAssets();
 
-            try { harmony.PatchAll(); }
-            catch (System.Exception e)
+            // PER-CLASS, not one PatchAll: Harmony's PatchAll aborts the WHOLE sweep on the
+            // first bad target, so a single stale method name silently disabled every patch
+            // enumerated after it (4.1.2 renamed a fistful of them). Patching class by class
+            // costs nothing and turns that cliff into one named warning per casualty.
             {
-                // a partial patch set is survivable and obvious in play; a dead mod is not
-                Log.LogError($"PatchAll FAILED — some patches did not apply, the map still loads: {e}");
+                int ok = 0;
+                var broken = new System.Collections.Generic.List<string>();
+                foreach (var type in System.Reflection.Assembly.GetExecutingAssembly().GetTypes())
+                {
+                    try
+                    {
+                        var processor = harmony.CreateClassProcessor(type);
+                        if (processor == null) continue;
+                        if (processor.Patch() != null) ok++;
+                    }
+                    catch (System.Exception e)
+                    {
+                        broken.Add(type.Name);
+                        Log.LogError($"[Patch] {type.Name} did not apply (the rest still did): {e.Message}");
+                    }
+                }
+                if (broken.Count == 0) Log.LogInfo($"[Patch] all {ok} patch classes applied");
+                else Log.LogWarning($"[Patch] {ok} applied, {broken.Count} FAILED: {string.Join(", ", broken)}");
             }
             IcebreakerFikaCompat.TryApply(harmony); // no-op without fika
 

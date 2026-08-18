@@ -75,7 +75,7 @@ namespace Manimal.Icebreaker
         // can walk off, find the money and come back. without it the only refusal was
         // inside Transit(), which is the countdown reaching zero: too late to be useful,
         // and it strands you in the zone with an expired timer.
-        [HarmonyPatch(typeof(EFT.ClientTransitController), "method_15")]
+        [HarmonyPatch(typeof(EFT.ClientTransitController), nameof(EFT.ClientTransitController.InteractionAction))]
         internal static class Patch_FareGate
         {
             [HarmonyPrefix]
