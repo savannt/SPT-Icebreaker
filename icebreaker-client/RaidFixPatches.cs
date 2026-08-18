@@ -82,7 +82,7 @@ namespace Manimal.Icebreaker
     // NRE -> aborts the whole raid init through PlayerCameraController.Create. swallow:
     // every later use of rainScreenDrops_0/screenWater_0 is null-guarded (verified), so
     // the only loss is raindrops-on-visor — on a snow map.
-    [HarmonyPatch(typeof(RainController), "method_0")]
+    [HarmonyPatch(typeof(RainController), nameof(RainController.CameraChanged))]
     internal static class Patch_RainScreenOnCam2
     {
         private static Exception Finalizer(Exception __exception)
@@ -94,10 +94,10 @@ namespace Manimal.Icebreaker
         }
     }
 
-    // weapon-sway effector NREs (EFT.Animations.BreathEffector.Process via ProceduralWeaponAnimation) —
-    // cosmetic sway on some weapon/bot combos; a throw here escapes into Player.LateUpdate.
-    // same family as the MotionEffector.FixedTracking swallow.
-    [HarmonyPatch(typeof(EFT.Animations.BreathEffector), nameof(EFT.Animations.BreathEffector.Process))]
+    // weapon-sway effector NREs (MotionEffector.Process via ProceduralWeaponAnimation; the
+    // actual thrower is BetterValProcessor.Process, one frame further in) — cosmetic sway on
+    // some weapon/bot combos; a throw here escapes into Player.LateUpdate.
+    [HarmonyPatch(typeof(MotionEffector), nameof(MotionEffector.Process))]
     internal static class Patch_SwayEffectorNeverThrows
     {
         // silent only on the icebreaker (per-frame); vanilla keeps its exceptions
@@ -183,7 +183,8 @@ namespace Manimal.Icebreaker
         // prefix above is the part that still earns its keep.
     }
 
-    [HarmonyPatch(typeof(WindowBreakerManager), "method_0")]
+    // (4.1.2 name inferred from behaviour, not proven by a stack: the manager's Awake.)
+    [HarmonyPatch(typeof(WindowBreakerManager), nameof(WindowBreakerManager.Awake))]
     internal static class Patch_WindowBreakerPrewarm
     {
         private static Exception Finalizer(Exception __exception, WindowBreakerManager __instance)
@@ -4372,7 +4373,8 @@ namespace Manimal.Icebreaker
     // quest/event singleton that's a dead shell on our backported map, so every door
     // interaction NREs in WorldInteractiveObject.method_3. the door still opens (the NRE is
     // after the swing); swallow the trigger emit — our map has no quest triggers to fire.
-    [HarmonyPatch(typeof(WorldInteractiveObject), "method_3")]
+    // (4.1.2 name inferred from behaviour, not proven by a stack: the state-change emit.)
+    [HarmonyPatch(typeof(WorldInteractiveObject), nameof(WorldInteractiveObject.DoorStateChanged))]
     internal static class Patch_DoorTriggerEmit
     {
         // vanilla maps have LIVE quest/event trigger singletons — masking their emit
