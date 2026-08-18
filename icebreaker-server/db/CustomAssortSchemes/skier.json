@@ -1,0 +1,54 @@
+{
+  "SKIER": {
+    "items": [
+      {
+        "_id": "6a757a2f478c184bd220c460",
+        "_tpl": "68947ad3e4bf255d1b0ca75c",
+        "parentId": "hideout",
+        "slotId": "hideout",
+        "location": null,
+        "upd": {
+          "UnlimitedCount": false,
+          "StackObjectsCount": 2,
+          "BuyRestrictionMax": 2,
+          "BuyRestrictionCurrent": 0
+        }
+      },
+      {
+        "_id": "6a757a2f478c184bd220c46a",
+        "_tpl": "68947a8ce4bf255d1b0ca759",
+        "parentId": "hideout",
+        "slotId": "hideout",
+        "location": null,
+        "upd": {
+          "UnlimitedCount": false,
+          "StackObjectsCount": 2,
+          "BuyRestrictionMax": 2,
+          "BuyRestrictionCurrent": 0
+        }
+      }
+    ],
+    "barter_scheme": {
+      "6a757a2f478c184bd220c460": [
+        [
+          {
+            "count": 1,
+            "_tpl": "6a461aed7391ab085a093760"
+          }
+        ]
+      ],
+      "6a757a2f478c184bd220c46a": [
+        [
+          {
+            "count": 2,
+            "_tpl": "6a461aed7391ab085a093760"
+          }
+        ]
+      ]
+    },
+    "loyal_level_items": {
+      "6a757a2f478c184bd220c460": 3,
+      "6a757a2f478c184bd220c46a": 3
+    }
+  }
+}
