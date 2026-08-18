@@ -1448,7 +1448,7 @@ namespace Manimal.Icebreaker
                 var gw = Comfort.Common.Singleton<GameWorld>.Instance;
                 var world = gw != null ? gw.World : null;
                 if (world == null) { Plugin.Log.LogWarning("[DoorHeal] no World_0 yet — registry heal skipped"); return; }
-                var dict = AccessTools.Field(typeof(World), "dictionary_1")?.GetValue(world)
+                var dict = AccessTools.Field(typeof(World), "_interactiveObjectsDictionary")?.GetValue(world)
                     as System.Collections.Generic.Dictionary<string, EFT.Interactive.WorldInteractiveObject>;
                 if (dict == null) { Plugin.Log.LogWarning("[DoorHeal] registry dictionary not found — heal skipped"); return; }
 

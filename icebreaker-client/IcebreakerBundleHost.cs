@@ -59,8 +59,8 @@ namespace Manimal.Icebreaker
                     return;
                 }
 
-                _entryType = AccessTools.Inner(typeof(EFT.AssetsManager.BundlesManager), "Class3523");
-                _loadedDict = AccessTools.Field(typeof(EFT.AssetsManager.BundlesManager), "Dictionary_0");
+                _entryType = AccessTools.Inner(typeof(EFT.AssetsManager.BundlesManager), "AssetBundleReference");
+                _loadedDict = AccessTools.Field(typeof(EFT.AssetsManager.BundlesManager), "_bundles");
                 if (_entryType == null || _loadedDict == null)
                 {
                     Plugin.Log.LogError("[Bundles] EFT.AssetsManager.BundlesManager layout changed — cannot host bundles from the plugin folder");

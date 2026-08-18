@@ -528,7 +528,7 @@ namespace Manimal.Icebreaker
                         t.gameObject.SetActive(true);
                         var wo = t.GetComponent<WeatherObstacle>();
                         if (wo == null) wo = t.gameObject.AddComponent<WeatherObstacle>(); // combines dryCount (maybe 0) + clears children
-                        AccessTools.Field(typeof(WeatherObstacle), "weatherObstacle_0")?.SetValue(null, wo);
+                        AccessTools.Field(typeof(WeatherObstacle), "_instance")?.SetValue(null, wo);
 
                         if (combined != null && (wo.MeshCollider == null || wo.MeshCollider.sharedMesh == null
                             || wo.MeshCollider.sharedMesh.vertexCount == 0))
@@ -545,7 +545,7 @@ namespace Manimal.Icebreaker
                         {
                             var b = wo.MeshCollider.bounds;
                             b.Expand(new Vector3(20f, 10f, 20f));
-                            AccessTools.Field(typeof(DepthPhotograper), "bounds_0")?.SetValue(dp, b);
+                            AccessTools.Field(typeof(DepthPhotograper), "_rainBounds")?.SetValue(dp, b);
                             dp.Render(); // one-time top-down render of JUST the obstacle mesh
                             Plugin.Log.LogDebug($"[Weather] WEATHER OBSTACLE LIVE: '{t.name}' src={(dryCount > 0 ? dryCount + " DryPlanes" : "quad MeshFilters")} -> {wo.MeshCollider.sharedMesh.vertexCount} verts, mask over {b.size.x:0}x{b.size.z:0}m — indoor snow clipped");
                         }
@@ -818,7 +818,7 @@ namespace Manimal.Icebreaker
             else
                 b = new Bounds(new Vector3(0f, 30f, 80f), new Vector3(260f, 120f, 420f)); // eyeballed ship envelope
 
-            AccessTools.Field(typeof(DepthPhotograper), "bounds_0").SetValue(dp, b);
+            AccessTools.Field(typeof(DepthPhotograper), "_rainBounds").SetValue(dp, b);
             dp.CreateDepthRT(); // (re)creates _depthRT at the photographer's own dimension
 
             var dimField = AccessTools.Field(typeof(DepthPhotograper), "_depthTextureDimension");
