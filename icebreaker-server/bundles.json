@@ -1,0 +1,35 @@
+{
+  "manifest": [
+    {
+      "key": "manimal/hovercraft.bundle",
+      "dependencyKeys": [
+        "shaders"
+      ]
+    },
+    {
+      "key": "manimal/icebreaker_keypad.bundle",
+      "dependencyKeys": [
+        "shaders"
+      ]
+    },
+    {
+      "key": "manimal/icebreaker_keypad_ui.bundle",
+      "dependencyKeys": []
+    },
+    {
+      "key": "manimal/icebreaker_postit.bundle",
+      "dependencyKeys": [
+        "shaders"
+      ]
+    },
+    {
+      "key": "manimal/torch_container.bundle",
+      "dependencyKeys": [
+        "assets/systems/effects/muzzleflash/muzzleflash.bundle",
+        "shaders",
+        "assets/content/weapons/weapon_root_anim_fix.bundle",
+        "assets/content/weapons/additional_hands/client_assets.bundle"
+      ]
+    }
+  ]
+}
