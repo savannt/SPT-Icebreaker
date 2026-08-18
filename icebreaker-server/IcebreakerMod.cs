@@ -43,7 +43,7 @@ public record ModMetadata : IModMetadata
     {
         // blowtorch item registration (custom parent + item clone) goes through
         // WTT CommonLib — already a hard dependency of the icebreaker modpack
-        { "com.wtt.commonlib", new SemanticVersioning.Range("~2.0.20") },
+        { "com.wtt.commonlib", new SemanticVersioning.Range(">=2.0.20") },
         // HARD since 0.2.4: the kordbreach set supplies the C-3 keycard AND the
         // black division dogtags — the tags are the currency for the ragman/skier
         // quest-reward barters, so without this the barters are unbuyable and BD
