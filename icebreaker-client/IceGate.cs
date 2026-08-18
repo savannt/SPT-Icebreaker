@@ -44,7 +44,7 @@ namespace Manimal.Icebreaker
 
         // the game hands smethod_6 the authoritative Location object before any other
         // identity exists — capture the id so construction-time patches can gate on it
-        [HarmonyPatch(typeof(LocalGame), "smethod_6")]
+        [HarmonyPatch(typeof(LocalGame), nameof(LocalGame.Create))]
         internal static class Patch_CaptureLocationId
         {
             private static void Prefix(JsonType.LocationSettings.Location location)

@@ -57,7 +57,7 @@ namespace Manimal.Icebreaker
             }
         }
 
-        [HarmonyPatch(typeof(LocalGame), "smethod_6")]
+        [HarmonyPatch(typeof(LocalGame), nameof(LocalGame.Create))]
         internal static class Patch_ConsumeFare
         {
             [HarmonyPrefix]

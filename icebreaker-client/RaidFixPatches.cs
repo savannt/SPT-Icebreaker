@@ -560,7 +560,7 @@ namespace Manimal.Icebreaker
     // safety net: if method_3 trips on yet another Cam2-era gap, don't let it kill Awake —
     // the rest of Awake (sharpen bind, event subscriptions) still runs and the camera lives.
     // a partially-initialized effects stack just means some per-frame effect NREs (non-fatal).
-    [HarmonyPatch(typeof(EffectsController), "method_3")]
+    [HarmonyPatch(typeof(EffectsController), nameof(EffectsController.Init))]
     internal static class Patch_EffectsControllerInit
     {
         private static Exception Finalizer(Exception __exception)
@@ -4539,7 +4539,7 @@ namespace Manimal.Icebreaker
     // rogue count is retail-authored, not a preference — skip the rescale for our waves
     // (gated by the suffixed BotZone* zone names only our map uses), keep the difficulty
     // and tagged&cursed behavior identical to the original.
-    [HarmonyPatch(typeof(LocalGame), "smethod_7")]
+    [HarmonyPatch(typeof(LocalGame), nameof(LocalGame.ModifySettings))]
     internal static class Patch_WaveSlotsAuthored
     {
         private static bool Prefix(WavesSettings wavesSettings, WildSpawnWave[] waves, ref WildSpawnWave[] __result)
