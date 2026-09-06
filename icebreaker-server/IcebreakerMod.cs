@@ -360,7 +360,13 @@ public class IcebreakerMod(
 // of the BBQ-S43 labyrinth torch (db/CustomItems) via WTT CommonLib. parents BEFORE
 // items — the item references the parent id. the hands behavior (draw/fire/holster
 // on the custom animator) lives in the icebreaker client plugin.
-[Injectable(TypePriority = OnLoadOrder.PostLoad + 2)]
+// 4.1.5 snapshots the items db when profiles start loading (SaveCallbacks, 600000) and
+// aborts the server if any item template appears after that point. Every custom item
+// (blowtorch, Boreas quest items, the BD gear crate) therefore has to be registered
+// below 600000; 500001 sits after WTT CommonLib (100000) and the 500000 crowd, and
+// matches CSGas. Registering before profile load is also what keeps saved profiles
+// holding these tpls valid on later boots.
+[Injectable(TypePriority = OnLoadOrder.HandbookCallbacks + 1)]
 public class BlowtorchRegistration(WTTServerCommonLib.WTTServerCommonLib wttCommon) : IOnLoad
 {
     public async Task OnLoadAsync(CancellationToken cancellationToken = default)

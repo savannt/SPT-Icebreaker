@@ -18,10 +18,11 @@
       <HintPath>$(SPTPath)\SPT_Runtime\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <PackageReference Include="SPTarkov.Common" Version="4.1.2" />
-    <PackageReference Include="SPTarkov.DI" Version="4.1.2" />
-    <PackageReference Include="SPTarkov.Server.Core" Version="4.1.2" />
-    <Reference Include="WTT-ServerCommonLib"><HintPath>D:\SPT\SPT_Runtime\user\mods\WTT-ServerCommonLib\WTT-ServerCommonLib.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SPTarkov.Common"><HintPath>D:\SPT415\SPT_Runtime\SPTarkov.Common.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SPTarkov.DI"><HintPath>D:\SPT415\SPT_Runtime\SPTarkov.DI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SPTarkov.Server.Core"><HintPath>D:\SPT415\SPT_Runtime\SPTarkov.Server.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SemanticVersioning"><HintPath>D:\SPT415\SPT_Runtime\SemanticVersioning.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="WTT-ServerCommonLib"><HintPath>D:\SPT415\SPT_Runtime\user\mods\WTT-ServerCommonLib\WTT-ServerCommonLib.dll</HintPath><Private>false</Private></Reference>
   </ItemGroup>
 
   <!--

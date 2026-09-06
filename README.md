@@ -1,10 +1,10 @@
-# Icebreaker — SPT 4.1.2 port
+# Icebreaker — SPT 4.1.5 port
 
 A backport of retail EFT 1.0's **Icebreaker** map — the frozen ship — with its crew, the
 Black Division garrison, authored loot, keypad doors, the blowtorch, the hovercraft transit
 and the intro cutscene. Ported from
 [danauraborealis/ManimalIcebreaker](https://github.com/danauraborealis/ManimalIcebreaker)
-(by **Manimal**) to **SPT 4.1.2**.
+(by **Manimal**) to **SPT 4.1.5**.
 
 ---
 
@@ -38,7 +38,7 @@ This mod will **not load** without all of the following installed:
 | WTT-ClientCommonLib / WTT-ServerCommonLib | 2.0.20 |
 | WTT-ContentBackport | 1.1.4 |
 
-**Requires SPT 4.1.2.** It will not run on 4.0.x — see *What the port changed* below.
+**Requires SPT 4.1.5.** It will not run on 4.0.x — see *What the port changed* below.
 
 Ladders is a **hard dependency**: the client plugin refuses to load without `com.tarkin.ladders`,
 because the ice-level intro is boarded by climbing a rope ladder.
@@ -79,6 +79,16 @@ To open it up for testing, blank the id in `SPT_Runtime/user/mods/ManimalIcebrea
 ladder to board. Scav raids to Icebreaker are intentionally disabled.
 
 ## What the port changed
+
+### 4.1.5
+
+Rebuilt against the **SPT 4.1.5** assemblies. 4.1.5 keeps the same EFT client build (40743)
+as 4.1.2, but adds a `PluginValidator` that checks every referenced `spt-*` assembly is
+Major.Minor `4.1`, makes **database integrity fatal** (any edited file under
+`SPT_Data/database` aborts the server, so this mod only ever touches the database in code),
+and adds `DatabaseModifiedAfterCutoffException` — custom items must be registered *before*
+`OnLoadOrder.SaveCallbacks` (600000). Registration here runs at `HandbookCallbacks + 1`
+(500001), well inside the cutoff.
 
 SPT 4.1.2 is a breaking release on both halves:
 
